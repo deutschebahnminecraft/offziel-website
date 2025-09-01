@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DB Minecraft Projekt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Allgemein */
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif; }
+        body { background-color:#f5f5f5; color:#222; }
+
+        /* Navigation */
+        nav { background-color:#cc0000; color:white; padding:1rem; position:sticky; top:0; z-index:1000; }
+        nav ul { list-style:none; display:flex; justify-content:center; gap:2rem; }
+        nav a { color:white; text-decoration:none; font-weight:700; }
+        nav a:hover { text-decoration:underline; }
+
+        /* Hero */
+        .hero { background-color:#eee; height:60vh; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; padding:1rem; }
+        .hero h1 { font-size:3rem; margin-bottom:1rem; color:#cc0000; }
+        .hero p { font-size:1.2rem; max-width:600px; }
+
+        /* Fortschritt */
+        .progress-container { max-width:800px; margin:2rem auto; padding:1rem; }
+        .progress { background:#ddd; border-radius:25px; overflow:hidden; margin-bottom:1rem; }
+        .progress-bar { height:25px; background:#cc0000; width:0%; line-height:25px; color:white; text-align:center; transition: width 1s; }
+
+        /* Galerie */
+        .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; max-width:1000px; margin:2rem auto; padding:0 1rem; }
+        .gallery img { width:100%; height:auto; cursor:pointer; border-radius:8px; transition: transform 0.3s; }
+        .gallery img:hover { transform: scale(1.05); }
+
+        /* Lightbox */
+        #lightbox { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:none; align-items:center; justify-content:center; z-index:2000; }
+        #lightbox img { max-width:90%; max-height:90%; border-radius:8px; }
+
+        /* Footer */
+        footer { background:#222; color:white; text-align:center; padding:1rem; margin-top:2rem; }
+        footer a { color:#cc0000; text-decoration:none; }
+        footer a:hover { text-decoration:underline; }
+
+        /* Responsiv */
+        @media(max-width:600px){ .hero h1{ font-size:2rem; } }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Startseite</a></li>
+            <li><a href="#progress">Fortschritt</a></li>
+            <li><a href="#gallery">Galerie</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <h1>DB Minecraft Projekt</h1>
+        <p>Erkunde unsere detailreiche DB-Welt in Minecraft mit funktionierenden Strecken, Bahnhöfen und Zügen. Updates, Screenshots und Tutorials findest du hier!</p>
+    </section>
+
+    <!-- Fortschritt -->
+    <section class="progress-container" id="progress">
+        <h2 style="text-align:center; margin-bottom:1rem;">Projektfortschritt</h2>
+        <div class="progress">
+            <div class="progress-bar" style="width:75%;">75%</div>
+        </div>
+        <p style="text-align:center;">Fertige Strecken im Vergleich zum Gesamtprojekt</p>
+    </section>
+
+    <!-- Galerie -->
+    <section class="gallery" id="gallery">
+        <img src="https://via.placeholder.com/400x300?text=Bahnhof+1" alt="Bahnhof 1">
+        <img src="https://via.placeholder.com/400x300?text=Strecke+2" alt="Strecke 2">
+        <img src="https://via.placeholder.com/400x300?text=Güterzug+3" alt="Güterzug 3">
+        <img src="https://via.placeholder.com/400x300?text=Tunnel+4" alt="Tunnel 4">
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox">
+        <img src="" alt="Lightbox Image">
+    </div>
+
+    <!-- Kontakt -->
+    <section class="progress-container" id="contact">
+        <h2 style="text-align:center; margin-bottom:1rem;">Kontakt</h2>
+        <p style="text-align:center;">Schreibe uns: <a href="mailto:info@db-minecraft-projekt.de">info@db-minecraft-projekt.de</a></p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 DB Minecraft Projekt | <a href="#home">Impressum</a>
+    </footer>
+
+    <script>
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+        document.querySelectorAll('.gallery img').forEach(img=>{
+            img.addEventListener('click',()=>{
+                lightbox.style.display='flex';
+                lightboxImg.src=img.src;
+            });
+        });
+        lightbox.addEventListener('click',()=>{ lightbox.style.display='none'; });
+
+        // Fortschrittsbalken Animation beim Scrollen
+        const progressBar = document.querySelector('.progress-bar');
+        window.addEventListener('scroll',()=>{
+            const rect = progressBar.getBoundingClientRect();
+            if(rect.top < window.innerHeight){
+                progressBar.style.width='75%';
+            }
+        });
+    </script>
+
+</body>
+</html>
